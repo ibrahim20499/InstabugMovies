@@ -4,6 +4,37 @@ import 'package:readmore/readmore.dart';
 import '../../model/moviesModel.dart';
 
 class HomePageHelper with ChangeNotifier {
+
+
+  Widget buildedMovies(BuildContext context, textBody , posterCard){
+    return Expanded(
+        child: Container(
+          margin: const EdgeInsets.all(4.0),
+          height: MediaQuery.of(context).size.height * 0.19,
+          child: Stack(
+            alignment: Alignment.center,
+            children: <Widget>[
+              Positioned(
+                child: Container(
+                  height: MediaQuery.of(context).size.height * 0.162,
+                  width: MediaQuery.of(context).size.width,
+                  decoration: BoxDecoration(
+                      gradient: const LinearGradient(
+                          begin: Alignment.topRight,
+                          end: Alignment.bottomLeft,
+                          colors: [
+                            Color(0xFF1a1c20),
+                            Color(0xFF222222),
+                          ]),
+                      borderRadius: BorderRadius.circular(8)),
+                  child: textBody,
+                ),
+              ),
+              posterCard,
+            ],
+          ),
+        ));
+  }
   Widget posterCard(BuildContext context, Movies movies) {
     return Positioned(
       left: 16,

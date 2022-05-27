@@ -25,6 +25,7 @@ class _HomePageState extends State<HomePage> {
       movies.addAll(_movies);
     });
   }
+
   @override
   void initState() {
     final data = Provider.of<FetchData>(context, listen: false);
@@ -60,37 +61,15 @@ class _HomePageState extends State<HomePage> {
               controller: _scrollController,
               itemCount: movies.length + 1,
               itemBuilder: (context, index) {
+                final textBody =
+                    Provider.of<HomePageHelper>(context, listen: false)
+                        .bodyText(context, movies[index]);
+                final posterCard =
+                    Provider.of<HomePageHelper>(context, listen: false)
+                        .posterCard(context, movies[index]);
                 if (index < movies.length) {
-                  return Expanded(
-                      child: Container(
-                    margin: const EdgeInsets.all(4.0),
-                    height: height * 0.19,
-                    child: Stack(
-                      alignment: Alignment.center,
-                      children: <Widget>[
-                        Positioned(
-                          child: Container(
-                            height: height * 0.162,
-                            width: MediaQuery.of(context).size.width,
-                            decoration: BoxDecoration(
-                                gradient: const LinearGradient(
-                                    begin: Alignment.topRight,
-                                    end: Alignment.bottomLeft,
-                                    colors: [
-                                      Color(0xFF1a1c20),
-                                      Color(0xFF222222),
-                                    ]),
-                                borderRadius: BorderRadius.circular(8)),
-                            child: Provider.of<HomePageHelper>(context,
-                                    listen: false)
-                                .bodyText(context, movies[index]),
-                          ),
-                        ),
-                        Provider.of<HomePageHelper>(context, listen: false)
-                            .posterCard(context, movies[index]),
-                      ],
-                    ),
-                  ));
+                  return Provider.of<HomePageHelper>(context, listen: false)
+                      .buildedMovies(context, textBody, posterCard);
                 } else {
                   return Provider.of<HomePageHelper>(context, listen: false)
                       .loadingIndicator();
