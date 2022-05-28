@@ -62,14 +62,15 @@ class _HomePageState extends State<HomePage> {
               itemCount: movies.length + 1,
               itemBuilder: (context, index) {
                 final textBody =
-                    Provider.of<HomePageHelper>(context, listen: false)
-                        .bodyText(context, movies[index]);
+                    Provider.of<HomePageHelper>(context, listen: false);
                 final posterCard =
-                    Provider.of<HomePageHelper>(context, listen: false)
-                        .posterCard(context, movies[index]);
+                    Provider.of<HomePageHelper>(context, listen: false);
                 if (index < movies.length) {
                   return Provider.of<HomePageHelper>(context, listen: false)
-                      .buildedMovies(context, textBody, posterCard);
+                      .buildedMovies(
+                          context,
+                          textBody.bodyText(context, movies[index]),
+                          posterCard.posterCard(context, movies[index]));
                 } else {
                   return Provider.of<HomePageHelper>(context, listen: false)
                       .loadingIndicator();
